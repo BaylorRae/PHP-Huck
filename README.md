@@ -3,19 +3,17 @@
 
 ```php
 <?php
-    require 'Huck/Huck.php';
+describe('Huck Fin', function() {
+   
+   it('should be Huck', function() {
+      expect('Huck')->toBe('Huck'); 
+   });
+   
+   it('should not be Huck', function() {
+      expect('Tom')->not->toBe('Huck'); 
+   });
     
-    describe('Huck Fin', function() {
-       
-       it('should be Huck', function() {
-          expect('Huck')->toBe('Huck'); 
-       });
-       
-       it('should not be Huck', function() {
-          expect('Tom')->not->toBe('Huck'); 
-       });
-        
-    });
+});
 ?>
 ```
 
