@@ -23,7 +23,7 @@ Huck is a BDD (Behavior Driven Development) framework based on [Jasmine for JS][
 Huck runs in the browser. Just upload it to your server, create the specs and load `index.php`. Huck will automatically find all files in `specs/*_spec.php` and run them.
 
 ## Available Matchers
-Huck most of the [matchers available in Jasmine][jasmine_matchers].
+Huck includes most of the [matchers available in Jasmine][jasmine_matchers].
 
 > `expect($x)->toEqual($y);` checks to see if `$x` and `$y` have the same value
 >
