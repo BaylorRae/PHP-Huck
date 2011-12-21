@@ -55,6 +55,10 @@ Huck most of the [matchers available in Jasmine][jasmine_matchers].
 >
 > `expect($x)->toBeInstanceOf();` runs [instanceof type operator][instanceof]
 
+You can invert the match by using
+
+`expect($x)->not->toBe($y)`
+
 ## Custom Matchers
 To create custom matchers run this in your spec file.
 
