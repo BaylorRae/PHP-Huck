@@ -26,9 +26,8 @@ class Huck_Expect {
     $this->spec = $spec;
     $this->useNot = $useNot;
     
-    if( $useNot == false ) {
+    if( $useNot == false )
       $this->not = new Huck_Expect($actual, $spec, true);
-    }
   }
   
   /**
@@ -79,32 +78,30 @@ class Huck_Expect {
     // based on answer here: http://stackoverflow.com/a/7729790/467546
     $matcher = strtolower(implode(preg_split('/(?<=[a-z])(?=[A-Z])/x', $matcher), ' '));
     
+    // specify the type
     if( $this->useNot )
       $matcher = 'not ' . $matcher;
     
-    // Force the boolean value to be a string
-    // if( is_bool($actual) )
-    //   $actual = $actual ? 'true' : 'false';
-    //   
-    // if( is_bool($expected) )
-    //   $expected = $expected ? 'true' : 'false';
-    
+    // replace text to read properly
     $matcher = str_replace(array('truthy', 'falsy'), array('true', 'fase'), $matcher);
     
-    // return sprintf('Expected %s %s %s', var_export($actual, true), $matcher, var_export($expected, true));
+    // start the error message
     $error_message = 'Expected ';
     
+    // print the $actual value properly
     if( is_array($actual) )
       $error_message .= '<pre>%s</pre>';
     else
       $error_message .= '%s';
-      
+    
+    // matcher text e.g to be
     $error_message .= ' %s';
     
+    // print the $expected value properly
     if( is_array($expected) )
       $error_message .= '<pre>%s</pre>';
     elseif( !is_bool($expected) && !empty($expected) )
-      $error_message .= '%s';
+      $error_message .= ' %s';
       
     return sprintf($error_message, var_export($actual, true), $matcher, var_export($expected, true));
   }
