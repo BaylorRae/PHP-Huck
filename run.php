@@ -13,7 +13,16 @@ echo "|_|  |_|\__,_|\___|_|\_\\\n";
 // echo "Starting up ...\n\n";
 echo "\n\n";
 
-# Output colorized text to terminal run
+/**
+ * Output colorized text to terminal
+ *
+ * @param string $text 
+ * @param string $color 
+ * @param string $use_line_break 
+ * @return void
+ * @author joeldg
+ * @link http://snippets.dzone.com/posts/show/3292
+ */
 function puts($text, $color="NORMAL", $use_line_break = true){
     # first define colors to use
     $_colors = array(
@@ -53,26 +62,36 @@ foreach( glob($path . '/specs/*_spec.php') as $file ) {
 $results = Huck::run();
 
 foreach( $results as $description => $test ) {
+  // Output the spec's description
   puts("$description", $test['fails'] ? RED : GREEN);
   
+  // Get some numbers
   $num_tests = count($test['results']);
   $num_failures = $test['fails'];
   $num_success = $num_tests - $num_failures;
   
+  // If it failed then show "x of x tests faild in 0.12s"
   if( $num_failures > 0 )
     puts(sprintf('%d of %d %s failed in %s', $num_failures, $num_tests, $num_failures === 1 ? 'test' : 'tests', $test['time']));
+  
+  // If it passed then show "x tests passed in 0.12s"
   else
     puts(sprintf('%d %s passed in %s', $num_success, $num_tests === 1 ? 'test' : 'tests', $test['time']));
-    
+  
+  // If we had failures, then loop and find them
   if( $num_failures ) {
     foreach( $test['results'] as $result ) {
       if( $result->success )
         continue;
       
+      // Add some spacing before we display anything
       echo EOL;
+      
+      // show the result's description
       puts("\tFAILED: ", RED, false);
       puts($result->description);
       
+      // clean up the error message and display it
       $message = strip_tags($result->error_message);
       $message = str_replace(array("\n", '  '), array('', ' '), $message);
       
