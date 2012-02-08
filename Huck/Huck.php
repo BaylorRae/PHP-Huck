@@ -148,7 +148,7 @@ class Huck {
     });
     
     self::addMatcher('toBeInstanceOf', function($actual, $expected) {
-      return $actual instanceof $actual;
+      return $actual instanceof $expected;
     });
   }
   
