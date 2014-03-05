@@ -114,7 +114,7 @@ puts("Finished in {$test['time']}");
 
 $message = pluralize($num_examples, 'example') . ', ' . pluralize($num_failures, 'failure');
 
-if( $test['fails'] == 0 )
+if( $num_failures == 0 )
   green($message);
 else {
   red($message);
@@ -123,18 +123,20 @@ else {
 
   echo EOL;
   puts("Failures:");
-  foreach( $test['results'] as $result ) {
-    if( $result->success )
-      continue;
+  foreach( $results as $test ) {
+    foreach( $test['results'] as $result ) {
+      if( $result->success )
+        continue;
 
-    ++$counter;
-    puts("\t$counter) {$result->description}");
-    
-    // clean up the error message and display it
-    $message = strip_tags($result->error_message);
-    $message = str_replace(array("\n", '  '), array('', ' '), $message);
-    
-    red("\t   {$message}");
+      ++$counter;
+      puts("\t$counter) {$result->description}");
+      
+      // clean up the error message and display it
+      $message = strip_tags($result->error_message);
+      $message = str_replace(array("\n", '  '), array('', ' '), $message);
+      
+      red("\t   {$message}");
+    }
   }
 }
 
