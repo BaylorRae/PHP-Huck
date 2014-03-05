@@ -90,24 +90,29 @@ $results = Huck::run();
 $description = key($results);
 $test = $results[$description];
 
+$num_examples = 0;
+$num_failures = 0;
+
 foreach( $results as $result ) {
 
   // create the quick statuses
   foreach( $result['results'] as $r ) {
-    if( $r->success )
+    if( $r->success ) {
       green('.', false);
-    else
+      $num_examples++;
+    }else {
       red('F', false);
+      $num_failures++;
+    }
   }
 
 }
-
 
 echo EOL, EOL;
 
 puts("Finished in {$test['time']}");
 
-$message = pluralize(count($test['results']), 'example') . ', ' . pluralize($test['fails'], 'failure');
+$message = pluralize($num_examples, 'example') . ', ' . pluralize($num_failures, 'failure');
 
 if( $test['fails'] == 0 )
   green($message);
