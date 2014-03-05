@@ -61,6 +61,7 @@ class Huck_Expect {
       }
       
       $this->spec->parent->results[] = $result;
+      return $success;
     }
   }
   
