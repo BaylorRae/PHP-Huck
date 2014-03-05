@@ -20,7 +20,6 @@ function it($description, $callback) {
 }
 
 function expect($actual) {
-  // Huck::runner()->spec->
   return new Huck_Expect($actual, Huck::runner()->spec);
 }
 
@@ -89,6 +88,15 @@ class Huck {
       if( file_exists($file) )
         require_once $file;
     }
+  }
+
+  public static function getMatchers() {
+    return array_keys(self::$matchers);
+  }
+
+  public static function resetMatchers() {
+    self::$matchers = array();
+    self::defaultMatchers();
   }
   
   public static function defaultMatchers() {
