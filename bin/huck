@@ -71,11 +71,19 @@ if( empty($argv[1]) )
 $file = $argv[1];
 
 // make sure the file exists
-if( !file_exists($file) )
+if( !file_exists($file) || !is_dir($file) )
   error('The file passed does not exist');
 
-// load the file
-require $file;
+if( is_dir($file) ) {
+  $directory = rtrim($file, '/');
+  $files = glob($directory . '/{*,**/*}.php', GLOB_BRACE);
+
+  foreach( $files as $file ) {
+    require $file;
+  }
+}else {
+  require $file;
+}
 
 // get the results from running the specs
 $result = Huck::run();
