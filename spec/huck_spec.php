@@ -19,19 +19,25 @@ describe('Huck', function() {
     'toBeInstanceOf'
   );
 
-  it('returns all available matchers', function() use($default_matchers) {
-    expect(Huck::getMatchers())->toBe($default_matchers);
+  describe("getMatchers", function() use($default_matchers) {
+    it('returns all available matchers', function() use($default_matchers) {
+      expect(Huck::getMatchers())->toBe($default_matchers);
+    });
   });
 
-  it('resets to default matchers', function() use($default_matchers) {
-    Huck::addMatcher('foobar', function() {});
-    Huck::resetMatchers();
-    expect(Huck::getMatchers())->toBe($default_matchers);
+  describe("resetMatchers", function() use($default_matchers) {
+    it('resets to default matchers', function() use($default_matchers) {
+      Huck::addMatcher('foobar', function() {});
+      Huck::resetMatchers();
+      expect(Huck::getMatchers())->toBe($default_matchers);
+    });
   });
 
-  it('adds a matcher', function() {
-    Huck::addMatcher('toHaveCheese', function() {});
-    expect(Huck::getMatchers())->toContain('toHaveCheese');
+  describe("addMatcher", function() use($default_matchers) {
+    it('adds a matcher', function() {
+      Huck::addMatcher('toHaveCheese', function() {});
+      expect(Huck::getMatchers())->toContain('toHaveCheese');
+    });
   });
 
 });
