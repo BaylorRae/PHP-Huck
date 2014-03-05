@@ -71,7 +71,7 @@ if( empty($argv[1]) )
 $file = $argv[1];
 
 // make sure the file exists
-if( !file_exists($file) || !is_dir($file) )
+if( !file_exists($file) )
   error('The file passed does not exist');
 
 if( is_dir($file) ) {
@@ -86,17 +86,22 @@ if( is_dir($file) ) {
 }
 
 // get the results from running the specs
-$result = Huck::run();
-$description = key($result);
-$test = $result[$description];
+$results = Huck::run();
+$description = key($results);
+$test = $results[$description];
 
-// create the quick statuses
-foreach( $test['results'] as $result ) {
-  if( $result->success )
-    green('.', false);
-  else
-    red('F', false);
+foreach( $results as $result ) {
+
+  // create the quick statuses
+  foreach( $result['results'] as $r ) {
+    if( $r->success )
+      green('.', false);
+    else
+      red('F', false);
+  }
+
 }
+
 
 echo EOL, EOL;
 
