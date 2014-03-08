@@ -17,8 +17,9 @@ class Huck_Suite {
          // user defined variables
          $variables;
   
-  function __construct($description) {
+  function __construct($description, $parent = null) {
     $this->description = $description;
+    $this->parent = $parent;
   }
   
   public function getVariables() {

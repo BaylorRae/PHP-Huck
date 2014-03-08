@@ -2,7 +2,7 @@
 
 describe('Huck', function() {
 
-  $default_matchers = array(
+  let('default_matchers', array(
     'toEqual',
     'toBe',
     'toMatch',
@@ -17,23 +17,23 @@ describe('Huck', function() {
     'toBeInteger',
     'toBeArray',
     'toBeInstanceOf'
-  );
+  ));
 
-  describe("getMatchers", function() use($default_matchers) {
-    it('returns all available matchers', function() use($default_matchers) {
-      expect(Huck::getMatchers())->toBe($default_matchers);
+  describe("getMatchers", function() {
+    it('returns all available matchers', function($spec) {
+      expect(Huck::getMatchers())->toBe($spec->default_matchers);
     });
   });
 
-  describe("resetMatchers", function() use($default_matchers) {
-    it('resets to default matchers', function() use($default_matchers) {
+  describe("resetMatchers", function() {
+    it('resets to default matchers', function($spec) {
       Huck::addMatcher('foobar', function() {});
       Huck::resetMatchers();
-      expect(Huck::getMatchers())->toBe($default_matchers);
+      expect(Huck::getMatchers())->toBe($spec->default_matchers);
     });
   });
 
-  describe("addMatcher", function() use($default_matchers) {
+  describe("addMatcher", function() {
     it('adds a matcher', function() {
       Huck::addMatcher('toHaveCheese', function() {});
       expect(Huck::getMatchers())->toContain('toHaveCheese');

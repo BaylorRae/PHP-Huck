@@ -13,6 +13,8 @@ class Huck_Runner {
          
          $spec = null,
          $result = null;
+
+  private $root_suite;
   
   /**
    * Creates a new suite
@@ -24,8 +26,29 @@ class Huck_Runner {
    */
   public function describe($description, $callback) {
     $suite = new Huck_Suite($description);
+
+    // keep up with root suite
+    if( $this->root_suite === null ) {
+      $this->root_suite = $suite;
+    }else {
+
+      // set parent to root suite when available
+      $suite->parent = $this->root_suite;
+    }
+
     $this->suites[] = $this->suite = $suite;
+
+    // add parent suite's variables to current
+    if( !empty($this->root_suite) && $this->root_suite == $suite->parent ) {
+      $suite->variables = $this->root_suite->variables;
+    }
+
     call_user_func($callback);
+
+    // reset root suite only when current suite is root
+    if( empty($suite->parent) ) {
+      $this->root_suite = null;
+    }
   }
   
   /**
@@ -69,10 +92,12 @@ class Huck_Runner {
         continue;
       
       $hash = sha1($suite->description . microtime(true));
+      $suite_variables = $suite->getVariables();
+
       Huck_Benchmark::start($hash);
       foreach( $suite->specs as $spec ) {
         $this->spec = $spec;
-        call_user_func($spec->callback, $suite->getVariables());
+        call_user_func($spec->callback, $suite_variables);
       }
       
       $output[$suite->description] = array(
