@@ -1,6 +1,6 @@
 <?php
 
-describe('All Tests', function() {
+describe('Lets Integration', function() {
 
   let('foo', 'bar');
 
