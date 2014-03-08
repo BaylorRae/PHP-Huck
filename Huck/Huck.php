@@ -31,6 +31,10 @@ function xit($description, $callback) {
   // don't do anything
 }
 
+function let($name, $value) {
+  Huck::runner()->addVariable($name, $value);
+}
+
 class Huck {
   
   // Contains our "runner"

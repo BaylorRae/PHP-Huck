@@ -40,6 +40,18 @@ class Huck_Runner {
     $spec = new Huck_Spec($description, $callback, $this->suite);
     $this->suite->specs[] = $spec;
   }
+
+  /**
+   * Stores variable into current suite.
+   *
+   * @param string $name
+   * @param mixed $value
+   * @return void
+   * @author Baylor Rae'
+   */
+  public function addVariable($name, $value) {
+    $this->suite->variables[$name] = $value;
+  }
   
   /**
    * Runs all Suites and Specs and returns the results
@@ -60,7 +72,7 @@ class Huck_Runner {
       Huck_Benchmark::start($hash);
       foreach( $suite->specs as $spec ) {
         $this->spec = $spec;
-        call_user_func($spec->callback);
+        call_user_func($spec->callback, $suite->getVariables());
       }
       
       $output[$suite->description] = array(

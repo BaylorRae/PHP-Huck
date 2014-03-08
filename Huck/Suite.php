@@ -12,10 +12,16 @@ class Huck_Suite {
   public $description = null,
          $failures = 0,
          $specs = array(),
-         $results = array();
+         $results = array(),
+         
+         // user defined variables
+         $variables;
   
   function __construct($description) {
     $this->description = $description;
   }
   
+  public function getVariables() {
+    return (object) $this->variables;
+  }
 }
