@@ -23,6 +23,28 @@ class Huck_Suite {
   }
   
   public function getVariables() {
-    return (object) $this->variables;
+    $vars = (object) $this->variables;
+
+    $vars = $this->resolveClosures($vars);
+
+    return $vars;
+  }
+
+  /**
+   * Finds all variables that are a function
+   * and invokes each one passing in an
+   * object with the current suite's variables.
+   *
+   * @param object $vars
+   * @return object
+   */
+  private function resolveClosures($vars) {
+    foreach( $vars as $key => $value ) {
+      if( is_callable($value) ) {
+        $vars->$key = call_user_func($value, $vars);
+      }
+    }
+
+    return $vars;
   }
 }
