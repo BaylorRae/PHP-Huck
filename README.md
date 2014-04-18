@@ -50,7 +50,13 @@ describe("let() syntax", function() {
 ```
 
 ## How to Use
-Huck runs in the browser. Just upload it to your server, create the specs and load `index.php`. Huck will automatically find all files in `specs/*_spec.php` and run them.
+Huck can be executed via `bin/huck` and it can run against a directory or a
+file.
+
+```bash
+$ bin/huck spec
+$ bin/huck spec/huck_suite_spec.php
+```
 
 ## Available Matchers
 Huck includes most of the [matchers available in Jasmine][jasmine_matchers].
