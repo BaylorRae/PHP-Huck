@@ -103,7 +103,7 @@ class Huck_Runner {
       $output[$suite->description] = array(
         'fails' => $suite->failures,
         'results' => $suite->results,
-        'time' => Huck_Benchmark::check($hash) . 's',
+        'time' => Huck_Benchmark::check($hash),
         'hash' => $hash
       );
     }
