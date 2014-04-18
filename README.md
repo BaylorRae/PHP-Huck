@@ -21,6 +21,8 @@ Huck is a BDD (Behavior Driven Development) framework based on [Jasmine for
 JS][jasmine_url]. It is designed for with a simple syntax to give it a low
 learning curve.
 
+---
+
 **WARNING**: This project should be considered _very dangerous_ and not be
 used on any real projects. It is an experimental testing suite for PHP and may
 break everything.
