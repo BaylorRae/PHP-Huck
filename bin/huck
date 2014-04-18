@@ -141,6 +141,8 @@ else {
       red("\t   {$message}");
     }
   }
+
+  exit(1);
 }
 
 echo EOL;
