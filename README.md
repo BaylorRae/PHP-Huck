@@ -19,6 +19,36 @@ describe('Huck Fin', function() {
 
 Huck is a BDD (Behavior Driven Development) framework based on [Jasmine for JS][jasmine_url]. It is designed for with a simple syntax to give it a low learning curve.
 
+## Features
+
+Huck includes the `let` syntax from RSpec. Because tests are defined in a
+procedural style, it's not possible to share common variables without using `global`.
+To get around this you can define a variable with `let()` and the value will be
+passed into your test.
+
+```php
+describe("let() syntax", function() {
+
+  // define the variable "user"
+  let('user', User::create(array('name' => 'Huck')));
+
+  it("gets the user object", function($spec) {
+    expect($spec->user->name)->toEqual('Huck');
+  });
+
+  // it resolves closures
+  let('user_new_name', function($spec) {
+    $user = $spec->user;
+    $user->name = 'Tom';
+    return $user;
+  });
+
+  it("gets the value from closure", function($spec) {
+    expect($spec->user_new_name->name)->toEqual('Tom');
+  });
+});
+```
+
 ## How to Use
 Huck runs in the browser. Just upload it to your server, create the specs and load `index.php`. Huck will automatically find all files in `specs/*_spec.php` and run them.
 
