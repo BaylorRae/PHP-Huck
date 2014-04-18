@@ -85,6 +85,8 @@ if( is_dir($file) ) {
   require $file;
 }
 
+Huck_Benchmark::start('test_total_time');
+
 // get the results from running the specs
 $results = Huck::run();
 $description = key($results);
@@ -110,7 +112,8 @@ foreach( $results as $result ) {
 
 echo EOL, EOL;
 
-puts("Finished in {$test['time']}");
+$test_time = Huck_Benchmark::check('test_total_time');
+puts("Finished in {$test_time}");
 
 $message = pluralize($num_examples, 'example') . ', ' . pluralize($num_failures, 'failure');
 

@@ -38,7 +38,7 @@ class Huck_Benchmark {
 	{
 		if (array_key_exists($name, static::$marks))
 		{
-			return (float) number_format((microtime(true) - static::$marks[$name]) * 1000, 2);
+			return microtime(true) - static::$marks[$name];
 		}
 
 		return (float) 0.0;
