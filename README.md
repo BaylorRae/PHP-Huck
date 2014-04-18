@@ -51,7 +51,7 @@ describe("let() syntax", function() {
     return $user;
   });
 
-  it("gets the value from closure", function($spec) {
+  it("gets the value from a closure", function($spec) {
     expect($spec->user_new_name->name)->toEqual('Tom');
   });
 });
