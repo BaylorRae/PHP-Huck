@@ -113,7 +113,7 @@ foreach( $results as $result ) {
 echo EOL, EOL;
 
 $test_time = Huck_Benchmark::check('test_total_time');
-puts("Finished in {$test_time}");
+puts(sprintf("Finished in %0.5f seconds", $test_time));
 
 $message = pluralize($num_examples, 'example') . ', ' . pluralize($num_failures, 'failure');
 
